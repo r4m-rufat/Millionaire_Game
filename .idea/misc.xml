@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/background_false_variant.xml" value="0.1671875" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/background_million_dollor_box.xml" value="0.2015625" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/background_question_box.xml" value="0.19166666666666668" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/background_selected_variant.xml" value="0.290625" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/background_variant_box.xml" value="0.290625" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/circle_countdown_progress.xml" value="0.28615384615384615" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/circle_countdown_shape.xml" value="0.264" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/gradient_point_box.xml" value="0.290625" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/ic_launcher_background.xml" value="0.19074074074074074" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/layout_point_box.xml" value="0.19166666666666668" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/shadow_variant_item_gradient.xml" value="0.136" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/shadow_variant_item_line_gradient.xml" value="0.19074074074074074" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/shadow_variant_item_top_line_gradient.xml" value="0.27025641025641023" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/stroke_variant_item.xml" value="0.14635416666666667" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/fragment_home.xml" value="0.176" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/fragment_money_schedule.xml" value="0.176" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/fragment_questions.xml" value="0.264" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/layout_money_box_item.xml" value="0.264" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/layout_variant_item.xml" value="0.264" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/layout_variant_item_b.xml" value="0.25833333333333336" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

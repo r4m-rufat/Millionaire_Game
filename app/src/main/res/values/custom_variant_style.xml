@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CutCorners">
+
+        <item name="cornerSizeTopRight">25dp</item>
+        <item name="cornerFamilyTopRight">cut</item>
+
+        <item name="cornerSizeBottomRight">25dp</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+
+        <item name="cornerSizeTopLeft">25dp</item>
+        <item name="cornerFamilyTopLeft">cut</item>
+
+        <item name="cornerSizeBottomLeft">25dp</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
+
+    </style>
+
+</resources>
