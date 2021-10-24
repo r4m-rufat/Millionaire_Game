@@ -16,4 +16,10 @@
         <item name="android:windowFullscreen">true</item>
 
     </style>
+
+    // custom dialog style
+    <style name="DialogStyle" parent="android:Theme.Material.Light.Dialog.NoActionBar">
+        <item name="android:colorBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

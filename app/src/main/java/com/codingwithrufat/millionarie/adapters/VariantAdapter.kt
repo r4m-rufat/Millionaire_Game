@@ -6,6 +6,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,9 @@ class VariantAdapter(
     context: Context,
     variants: List<String>,
     question: Question,
-    listener: OnClickVariantItem
+    listener: OnClickVariantItem,
+    correctVariant: Int?,
+    randomVariant: Int?
 ) : RecyclerView.Adapter<VariantAdapter.ViewHolder>() {
 
     private val context: Context = context
@@ -31,12 +34,23 @@ class VariantAdapter(
     private val listener = listener
     private var clickedItem = false
 
+    private var onlyCorrect = false
+
+    private var correctVariant = correctVariant
+    private var randomVariant = randomVariant
+
     private val TAG = "VariantAdapter"
 
     private var animatorSet: AnimatorSet = AnimatorSet()
 
-    fun updateQuestion(newQuestion: Question){
-        question = newQuestion
+    fun updateVariants(correctVariant: Int, randomVariant: Int){
+        this.correctVariant = correctVariant
+        this.randomVariant = randomVariant
+        notifyDataSetChanged()
+    }
+
+    fun showOnlyCorrectVariant(){
+        onlyCorrect = true
         notifyDataSetChanged()
     }
 
@@ -49,8 +63,27 @@ class VariantAdapter(
         holder: VariantAdapter.ViewHolder,
         @SuppressLint("RecyclerView") position: Int
     ) {
-        holder.txt_variant.text = question.content?.get(position)
-        holder.txt_variant_type.text = variants[position]
+
+        if (!onlyCorrect){
+            if (correctVariant != null && randomVariant != null){
+                if (position == correctVariant || position == randomVariant){
+                    holder.txt_variant.text = question.content?.get(position)
+                    holder.txt_variant_type.text = variants[position]
+                }else{
+                    holder.itemView.visibility = GONE
+                }
+            }else{
+                holder.txt_variant.text = question.content?.get(position)
+                holder.txt_variant_type.text = variants[position]
+            }
+        }else{
+            if (position == question.correct){
+                holder.txt_variant.text = question.content?.get(position)
+                holder.txt_variant_type.text = variants[position]
+            }else{
+                holder.itemView.visibility = GONE
+            }
+        }
 
         holder.shapeableImageView.setOnClickListener {
 

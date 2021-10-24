@@ -15,6 +15,7 @@ import androidx.core.animation.addListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codingwithrufat.millionarie.R
 import com.codingwithrufat.millionarie.adapters.VariantAdapter
+import com.codingwithrufat.millionarie.dialogs.showAuditoryChooseDialog
 import com.codingwithrufat.millionarie.models.Question
 import com.codingwithrufat.millionarie.utils.converters.convertJsonFileToModel
 import com.codingwithrufat.millionarie.utils.default.returnMoneyList
@@ -45,6 +46,7 @@ MediaPlayer.OnCompletionListener{
     private var i: Int = 100
     private var COUNTDOWN_TIME = 60
     private var question_number = 1
+    private var used_fifty_fifty = false
 
     // coroutine
     var timeJob: Job? = null
@@ -80,6 +82,11 @@ MediaPlayer.OnCompletionListener{
 
         clickedShapeableMoneyBox(view)
 
+        clickedIcFiftyFiftyHelp(view)
+        clickedIcAuditoryHelp(view)
+
+        clickedPhoneHelp(view)
+
         return view
     }
 
@@ -92,11 +99,62 @@ MediaPlayer.OnCompletionListener{
 
     }
 
+    private fun clickedIcFiftyFiftyHelp(view: View){
+        if (!used_fifty_fifty){
+            view.ic_50_50.setOnClickListener {
+                var correct_variant = question.correct!!
+                var variantList = mutableListOf(0, 1, 2, 3)
+                variantList.remove(correct_variant)
+                var random_variant = variantList.random()
+                variantAdapter.updateVariants(correct_variant, random_variant)
+                view.ic_50_50_cancel.visibility = View.VISIBLE
+                view.ic_50_50.isClickable = false
+            }
+        }
+    }
+
+    private fun clickedIcAuditoryHelp(view: View){
+        if (!used_fifty_fifty){
+            view.ic_auditory.setOnClickListener {
+                val correct = (50..80).random()
+                val other_variant1 = (6..((100-correct)/2)).random()
+                val other_variant2 = (1..(100-(correct+other_variant1))).random()
+                val other_variant3 = 100 - (correct + other_variant1 + other_variant2)
+                when (question.correct) {
+                    0 -> {
+                        showAuditoryChooseDialog(requireContext(), correct, other_variant1, other_variant2, other_variant3)
+                    }
+                    1 -> {
+                        showAuditoryChooseDialog(requireContext(), other_variant1, correct, other_variant2, other_variant3)
+                    }
+                    2 -> {
+                        showAuditoryChooseDialog(requireContext(), other_variant1, other_variant2, correct, other_variant3)
+                    }
+                    3 -> {
+                        showAuditoryChooseDialog(requireContext(), other_variant1, other_variant2, other_variant3, correct)
+                    }
+                }
+
+                view.ic_auditory_cancel.visibility = View.VISIBLE
+                view.ic_auditory.isClickable = false
+            }
+        }
+    }
+
+    private fun clickedPhoneHelp(view: View){
+        view.ic_phone.setOnClickListener {
+            variantAdapter.showOnlyCorrectVariant()
+            view.ic_phone_cancel.visibility = View.VISIBLE
+            view.ic_phone.isClickable = false
+        }
+    }
+
     private fun clickedShapeableMoneyBox(view: View){
 
         view.money_shapeable.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, moneyScheduleFragment, "money_schedule")
+                .addToBackStack("questions")
                 .commit()
         }
 
@@ -113,7 +171,6 @@ MediaPlayer.OnCompletionListener{
 
                     if(COUNTDOWN_TIME==0){
                         main_mediaPlayer.stop()
-                        main_mediaPlayer.release()
                         wrong_mediaPlayer.start()
                     }
 
@@ -141,7 +198,7 @@ MediaPlayer.OnCompletionListener{
 
         question = questions.random()
         questions.remove(question)
-        variantAdapter = VariantAdapter(requireContext(), variant_type, question, this)
+        variantAdapter = VariantAdapter(requireContext(), variant_type, question, this, null, null)
 
         view.recyclerVariants.adapter = variantAdapter
 
@@ -153,36 +210,38 @@ MediaPlayer.OnCompletionListener{
         moneyScheduleFragment.arguments = args
     }
 
-
-
     override fun onCompletion(mp: MediaPlayer?) {
 
-        when(mp){
-            correct_mediaPlayer -> {
-                question = questions.random()
-                questions.remove(question)
-                variantAdapter = VariantAdapter(requireContext(), variant_type, question, this)
-                view?.recyclerVariants?.adapter = variantAdapter
-                view?.let { setWidgets(it) }
+        if (question_number<15){
+            when(mp){
+                correct_mediaPlayer -> {
+                    question = questions.random()
+                    questions.remove(question)
+                    variantAdapter = VariantAdapter(requireContext(), variant_type, question, this, null, null)
+                    view?.recyclerVariants?.adapter = variantAdapter
+                    view?.let { setWidgets(it) }
 
-                question_number+=1
-                view?.txt_questionPoint?.text = returnMoneyList()[returnMoneyList().size-question_number]
+                    question_number+=1
+                    view?.txt_questionPoint?.text = returnMoneyList()[returnMoneyList().size-question_number]
 
-                sendQestionNumber(question_number)
+                    sendQestionNumber(question_number)
 
-                customTimerCoroutine()
+                    customTimerCoroutine()
+                }
+                wrong_mediaPlayer -> {
+                    main_mediaPlayer.stop()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .add(R.id.fragment_container, HomeFragment(), "home")
+                        .commit()
+                }
             }
-            wrong_mediaPlayer -> {
-                main_mediaPlayer.stop()
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, HomeFragment(), "home")
-                    .commit()
-            }
+
+            main_mediaPlayer = MediaPlayer.create(requireActivity(), R.raw.hundred_thousend)
+            main_mediaPlayer.isLooping = true
+            main_mediaPlayer.start()
+        }else{
+            // TODO In here congratulation page is opened
         }
-
-        main_mediaPlayer = MediaPlayer.create(requireActivity(), R.raw.hundred_thousend)
-        main_mediaPlayer.isLooping = true
-        main_mediaPlayer.start()
     }
 
     override fun onClickedVariantCallBack(check: Boolean) {
