@@ -91,13 +91,14 @@ class VariantAdapter(
                 holder.shapeableImageView.background =
                     ContextCompat.getDrawable(context, R.drawable.background_selected_variant)
                 CoroutineScope(Main).launch {
-                    delay(800L)
                     // glow animation is started from here
                     if (position == question.correct) {
                         listener.onClickedVariantCallBack(true)
+                        delay(3500L)
                         holder.shapeableImageView.falseGlowAnimation(animatorSet)
                     } else {
                         listener.onClickedVariantCallBack(false)
+                        delay(3500L)
                         holder.shapeableImageView.background =
                             ContextCompat.getDrawable(context, R.drawable.background_false_variant)
                         holder.shapeableImageView.falseGlowAnimation(animatorSet)

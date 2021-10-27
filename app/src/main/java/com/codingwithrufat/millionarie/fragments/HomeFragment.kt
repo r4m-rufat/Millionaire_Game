@@ -46,9 +46,13 @@ class HomeFragment : Fragment() {
         main_soundPlayer.start()
     }
 
-    override fun onDetach() {
-        super.onDetach()
+    override fun onStop() {
+        super.onStop()
         main_soundPlayer.stop()
-        main_soundPlayer.release()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        main_soundPlayer.start()
     }
 }
