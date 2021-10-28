@@ -16,6 +16,7 @@ import com.codingwithrufat.millionarie.dialogs.showAuditoryChooseDialog
 import com.codingwithrufat.millionarie.models.Question
 import com.codingwithrufat.millionarie.utils.converters.convertJsonFileToModel
 import com.codingwithrufat.millionarie.utils.default.returnMoneyList
+import com.codingwithrufat.millionarie.utils.internal_storage.PreferenceManager
 import kotlinx.android.synthetic.main.fragment_questions.*
 import kotlinx.android.synthetic.main.fragment_questions.view.*
 import kotlinx.android.synthetic.main.layout_variant_item.*
@@ -61,6 +62,7 @@ class QuestionsFragment : Fragment(),
     private var moneyScheduleFragment: MoneyScheduleFragment = MoneyScheduleFragment()
     private lateinit var textAnimation: Animation
     private lateinit var recyclerViewAnimation: LayoutAnimationController
+    private lateinit var preferenceManager: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +70,8 @@ class QuestionsFragment : Fragment(),
         wrong_mediaPlayer = MediaPlayer.create(requireActivity(), R.raw.wrong_answer)
         main_mediaPlayer = MediaPlayer.create(requireActivity(), R.raw.hundred_7thousend5hundred)
         final_answer_mediaPlayer = MediaPlayer.create(requireActivity(), R.raw.final_answer)
+
+        preferenceManager = PreferenceManager(requireContext())
         questions = convertJsonFileToModel(requireContext())
     }
 
@@ -305,6 +309,11 @@ class QuestionsFragment : Fragment(),
                         loadAnimation(it)
                     }
 
+                    var highScore = preferenceManager.getInt("high_score")
+                    if (question_number>highScore){
+                        preferenceManager.putInt("high_score", question_number)
+                    }
+
                     question_number += 1
                     view?.txt_questionPoint?.text =
                         returnMoneyList()[returnMoneyList().size - question_number]
@@ -325,13 +334,35 @@ class QuestionsFragment : Fragment(),
                         .commit()
                 }
             }
+
             // we reset all helps again for the each question
             usedHelpPhone = false
             usedHelpAuditory = false
             usedHelp_50_50 = false
 
         } else {
-            // TODO In here congratulation page is opened
+            when(mp){
+
+                correct_mediaPlayer -> {
+                    // TODO In here congratulation page is opened
+                    // if question_number is the last, then congrats page is opened
+                    if (question_number == 15){
+                        requireActivity().supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, CongratulationsFragment(), "congrats_fragment")
+                            .commit()
+                        main_mediaPlayer.stop()
+                    }
+                    preferenceManager.putInt("high_score", 15) // 15 is the last question number
+                }
+
+                wrong_mediaPlayer -> {
+                    main_mediaPlayer.stop()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .add(R.id.fragment_container, HomeFragment(), "home")
+                        .commit()
+                }
+
+            }
         }
     }
 
@@ -339,6 +370,14 @@ class QuestionsFragment : Fragment(),
         timeJob?.cancel()
         main_mediaPlayer.stop()
         final_answer_mediaPlayer.start()
+
+        /**
+         * after clicked a variant we can't choose a help
+         */
+        usedHelp_50_50 = true
+        usedHelpAuditory = true
+        usedHelpPhone = true
+
         final_answer_mediaPlayer.setOnCompletionListener {
             if (check) {
                 correct_mediaPlayer.start()
@@ -346,6 +385,7 @@ class QuestionsFragment : Fragment(),
                 wrong_mediaPlayer.start()
             }
         }
+
     }
 
 }

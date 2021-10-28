@@ -170,6 +170,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
                 android:text="$ 8000"
+                android:fontFamily="cursive"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />

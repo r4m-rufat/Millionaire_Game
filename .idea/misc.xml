@@ -20,11 +20,12 @@
         <entry key="..\:/Android Files/Millionarie/app/src/main/res/drawable/theme_progressbar.xml" value="0.2759259259259259" />
         <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/dialog_for_auditory_choose.xml" value="0.27447916666666666" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/fragment_congratulations.xml" value="0.264" />
         <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/fragment_home.xml" value="0.176" />
         <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/fragment_money_schedule.xml" value="0.176" />
         <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/fragment_questions.xml" value="0.264" />
         <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/layout_money_box_item.xml" value="0.264" />
-        <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/layout_variant_item.xml" value="0.264" />
+        <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/layout_variant_item.xml" value="0.2" />
         <entry key="..\:/Android Files/Millionarie/app/src/main/res/layout/layout_variant_item_b.xml" value="0.25833333333333336" />
       </map>
     </option>

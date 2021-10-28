@@ -22,16 +22,19 @@
         android:background="@drawable/shadow_variant_item_line_gradient" />
 
     <RelativeLayout
+        android:id="@+id/rel_variantBox"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/shapeImageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@drawable/background_variant_box"
+            android:minHeight="50dp"
             app:shapeAppearance="@style/CutCorners"
             app:strokeColor="@color/white"
             app:strokeWidth="2dp" />
@@ -54,6 +57,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/variant_type"
             android:paddingLeft="10dp"
+            android:paddingRight="8dp"
             android:text="New York City"
             android:textColor="@color/white"
             android:textSize="16sp" />
@@ -68,6 +72,7 @@
         android:background="@drawable/shadow_variant_item_top_line_gradient" />
 
     <View
+        android:id="@+id/bottom_view"
         android:layout_width="match_parent"
         android:layout_height="2.5dp"
         android:layout_marginLeft="55dp"

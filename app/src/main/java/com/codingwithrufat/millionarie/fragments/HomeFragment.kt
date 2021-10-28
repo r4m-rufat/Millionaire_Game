@@ -8,19 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.FragmentContainerView
 import com.codingwithrufat.millionarie.R
+import com.codingwithrufat.millionarie.utils.default.returnMoneyList
+import com.codingwithrufat.millionarie.utils.internal_storage.PreferenceManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 class HomeFragment : Fragment() {
 
     private lateinit var main_soundPlayer: MediaPlayer
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-
-        }
-    }
+    private lateinit var preferenceManager: PreferenceManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +25,10 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
+        preferenceManager = PreferenceManager(requireContext())
+
         soundSetup()
+        setHighScore(view)
 
         view.rel_play.setOnClickListener {
             requireActivity().supportFragmentManager.beginTransaction()
@@ -38,6 +37,14 @@ class HomeFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun setHighScore(view: View){
+        try {
+            view.txt_highScore.text = returnMoneyList()[returnMoneyList().size - preferenceManager.getInt("high_score")]
+        }catch (e: IndexOutOfBoundsException){
+            view.txt_highScore.text = "$ 0"
+        }
     }
 
     private fun soundSetup(){
@@ -51,8 +58,11 @@ class HomeFragment : Fragment() {
         main_soundPlayer.stop()
     }
 
-    override fun onStart() {
-        super.onStart()
-        main_soundPlayer.start()
+    override fun onResume() {
+        super.onResume()
+        if (!main_soundPlayer.isPlaying){
+            main_soundPlayer.start()
+        }
     }
+
 }

@@ -1,6 +1,5 @@
 package com.codingwithrufat.millionarie.adapters
 
-import android.animation.AnimatorSet
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
@@ -12,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.codingwithrufat.millionarie.R
 import kotlinx.android.synthetic.main.layout_money_box_item.view.*
-import kotlinx.android.synthetic.main.layout_variant_item.view.*
 import kotlinx.android.synthetic.main.layout_variant_item.view.shapeImageView
 
 class MoneyAdapter(
@@ -41,7 +39,7 @@ class MoneyAdapter(
             holder.shapeableImageView.background =
                 ContextCompat.getDrawable(context, R.drawable.background_million_dollor_box)
             holder.txt_money.textSize = 24f
-            holder.txt_money.typeface = Typeface.DEFAULT_BOLD
+            holder.txt_money.typeface = Typeface.create("cursive", Typeface.BOLD)
         }
 
         if (position == current_money) {
