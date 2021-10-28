@@ -13,6 +13,19 @@ Sounds change after some questions.
 <br />
 <br />
 <br />
+
+# Main Features
+1. Kotlin
+2. Single Activity Architecture
+3. Fragments
+4. Lifecycles
+5. Local Json
+6. Animations
+7. Custom themes
+8. Coroutines
+9. Custom Font
+10. Custom Circle Timer
+
 # Screenvideo
 
 https://user-images.githubusercontent.com/53703480/139311472-95490dca-e1ec-4628-8ae5-a676b57c8b52.mp4
