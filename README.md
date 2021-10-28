@@ -2,10 +2,17 @@
 <img src="https://user-images.githubusercontent.com/53703480/139309814-2a4c0316-5afd-46a0-98ca-d7183ce56d7f.png" align="left"
 width="200" hspace="10" vspace="10">
 
-Millionaire is a quiz application. 
-And in this application difference is that it is offline game.
+Millionaire is a quiz application.<br />
 
+And in this application difference is that it is offline game. <br/>
+There are some features, effects, animations.<br/>
 
+Sounds change after some questions.
+<br />
+<br />
+<br />
+<br />
+<br />
 # Screenvideo
 
 https://user-images.githubusercontent.com/53703480/139311472-95490dca-e1ec-4628-8ae5-a676b57c8b52.mp4
